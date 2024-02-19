@@ -24,4 +24,15 @@ public class RickAndMortyService {
         RickAndMortyCharacter response= rc.get().uri("/character/"+id).retrieve().body(RickAndMortyCharacter.class);
         return response;
     }
+
+
+    public List<RickAndMortyCharacter> searchCharacterByStatus(String status) {
+        RickAndMortyResponse response = rc.get().uri("/character").retrieve().body(RickAndMortyResponse.class);
+        return response.getResults().stream().filter(c -> c.getStatus().equals(status)).toList();
+    }
+
+    public int numberOfAliveCharsOfSpecies(String species) {
+        List<RickAndMortyCharacter> searchList = searchCharacterByStatus("Alive");
+        return searchList.stream().filter(c -> c.getSpecies().equals(species)).toList().size();
+    }
 }

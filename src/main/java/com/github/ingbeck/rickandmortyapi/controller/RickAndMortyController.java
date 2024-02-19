@@ -4,21 +4,18 @@ import com.github.ingbeck.rickandmortyapi.model.RickAndMortyCharacter;
 import com.github.ingbeck.rickandmortyapi.model.RickAndMortyResponse;
 import com.github.ingbeck.rickandmortyapi.service.RickAndMortyService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ram")
+@RequestMapping("/api/characters")
 @RequiredArgsConstructor
 public class RickAndMortyController {
 
     private final RickAndMortyService service;
 
-    @GetMapping
+    @GetMapping()
     public RickAndMortyResponse getAllChars(){
         return service.getAllChars();
     }
@@ -27,5 +24,15 @@ public class RickAndMortyController {
     public RickAndMortyCharacter getCharacterById(@PathVariable int id){
         return service.getCharacterById(id);
     }
+
+    @GetMapping("/character")
+    public List<RickAndMortyCharacter> searchCharacterByStatus(@RequestParam String status){
+        return service.searchCharacterByStatus(status);
+    }
+
+   @GetMapping("/species-statistics")
+    public int numberOfAliveCharsOfSpecies(@RequestParam String species){
+        return service.numberOfAliveCharsOfSpecies(species);
+   }
 
 }
