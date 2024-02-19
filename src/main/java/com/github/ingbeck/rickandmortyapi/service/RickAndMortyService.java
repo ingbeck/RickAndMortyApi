@@ -26,11 +26,12 @@ public class RickAndMortyService {
     }
 
 
+    //Funktioniert nicht, da nur erste Seite gelesen wird
+    //Lieber mit aufrufen aus der Doku
     public List<RickAndMortyCharacter> searchCharacterByStatus(String status) {
         RickAndMortyResponse response = rc.get().uri("/character").retrieve().body(RickAndMortyResponse.class);
         return response.getResults().stream().filter(c -> c.getStatus().equals(status)).toList();
     }
-
     public int numberOfAliveCharsOfSpecies(String species) {
         List<RickAndMortyCharacter> searchList = searchCharacterByStatus("Alive");
         return searchList.stream().filter(c -> c.getSpecies().equals(species)).toList().size();
