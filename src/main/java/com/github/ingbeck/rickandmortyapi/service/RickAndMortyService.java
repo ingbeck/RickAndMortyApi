@@ -13,6 +13,7 @@ import java.util.List;
 public class RickAndMortyService {
 
 
+    //Test
     private RestClient rc;
 
     public RickAndMortyService(@Value("${basic.url}") String baseUrl){
